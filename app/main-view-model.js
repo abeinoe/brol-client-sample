@@ -1,6 +1,6 @@
 var Observable = require("data/observable").Observable;
-var SocketIO = require('nativescript-socketio');
-const server = "chat.kodekreatif.co.id";
+var SocketIO = require('nativescript-socket.io');
+const server = "http://chat.kodekreatif.co.id";
 
 function getMessage(counter) {
     if (counter <= 0) {
@@ -23,18 +23,16 @@ function createViewModel() {
     viewModel.counter = 42;
     viewModel.message = getMessage(viewModel.counter);
     viewModel.sockmessage = "not connected";
-    viewModel.socketIO = new SocketIO( server, {});
+    viewModel.socketIO = SocketIO.connect( server, {});
     viewModel.socketIO.on('authenticated', function() {
-      this.set("sockmessage", getSocketMessage(true));
+      alert(getSocketMessage(true));
     });
     viewModel.socketIO.on('unauthorized', function() {
-      this.set("sockmessage", getSocketMessage(false));
+      alert(getSocketMessage(false));
     });
 
     viewModel.onTap = function() {
-        this.counter--;
-        this.set("message", getMessage(this.counter));
-        this.socketIO.connect();
+        this.socketIO.connect(server);
         this.socketIO.emit('authentication', {username: 'abe', password : 'eba'});
     }
 

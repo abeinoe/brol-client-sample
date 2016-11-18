@@ -6,11 +6,12 @@
   "nativescript": {
     "id": "org.nativescript.androidnssocket",
     "tns-android": {
-      "version": "2.3.0"
+      "version": "2.4.0"
     }
   },
   "dependencies": {
-    "nativescript-socketio": "^2.2.9",
+    "nativescript-socket.io": "^0.2.2",
+    "socket.io": "^1.5.1",
     "tns-core-modules": "2.3.0"
   },
   "devDependencies": {
